@@ -29,7 +29,7 @@ src
 
 ```
 
-src/page/Hogehoge
+src/page/hogehoge
 
 ```
 |
