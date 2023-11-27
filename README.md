@@ -82,15 +82,15 @@ master_3_2023XXXXXXXX.zip
 
 ソース履歴
 
-```
-履歴番号　マージしたソース			元のソース	                           コメント				備考			担当　　日付
-1	  master_1_2023XXXXXXXX.zip    master_0_202311241525.zip 　01 ログイン画面 ○○の修正　　          　　		田中　　	2023/11/27	
-																					ID: user
-																					パスワード：user
-																					ログインは可能
-																					ログイン後の画面遷移は未実装
+`
+履歴番号　マージしたソース	元のソース	         コメント				備考		担当　　日付
+1	  master_1_2023XXXXXXXX.zip    master_0_202311241525.zip 　01 ログイン画面 ○○の修正　　	田中　　	2023/11/27	
+												ID: user
+												パスワード：user
+												ログインは可能
+												ログイン後の画面遷移は未実装
 
-2 	 master_2_2023XXXXXXXX.zip       master_1_2023XXXXXXXX.zip   09 ○○画面の新規追加							山田		2023/11/28
+2 	 master_2_2023XXXXXXXX.zip       master_1_2023XXXXXXXX.zip   09 ○○画面の新規追加	山田		2023/11/28
 3	 master_3_2023XXXXXXXX.zip　　master_2_2023XXXXXXXX.zip   	09 ○○画面の機能修正　　　　　　　　　　　　　山田　　2023/12/01
 4
 ```
