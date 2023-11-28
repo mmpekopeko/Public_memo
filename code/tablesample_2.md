@@ -1,93 +1,61 @@
-
 ```tsx
+
+import { useTable } from '@tanstack/react-table';
+import { Box, ChakraProvider, CSSReset, extendTheme, Table, Tbody, Td, Th, Thead, Tr } from '@chakra-ui/react';
 import React from 'react';
-import {
-  useTable,
-  useSortBy,
-  usePagination,
-  TableInstance,
-  Column,
-} from '@tanstack/react-table';
-import { ChakraProvider, Table, Tbody, Tr, Td, Th, VStack } from '@chakra-ui/react';
 
-const columns: Column[] = [
-  { Header: 'ID', accessor: 'id' },
-  { Header: '名前', accessor: 'name' },
-  { Header: 'サイズ', accessor: 'size' },
-  { Header: '個数', accessor: 'count' },
+// ダミーデータ
+const dataList = [
+  { id: 1, name: 'John Doe', age: 25 },
+  { id: 2, name: 'Jane Doe', age: 30 },
+  { id: 3, name: 'Bob Smith', age: 22 },
 ];
 
-const list = [
-  { id: 0, name: 'りんご', size: 'L', count: 3 },
-  { id: 1, name: 'みかん', size: 'M', count: 5 },
-  { id: 2, name: 'バナナ', size: 'S', count: 2 },
-];
+// Chakra UIのテーマ
+const theme = extendTheme({});
 
-const MyTable = ({ columns, data }: { columns: Column[]; data: any[] }) => {
-  const {
-    getTableProps,
-    getTableBodyProps,
-    headerGroups,
-    page,
-    nextPage,
-    previousPage,
-    canNextPage,
-    canPreviousPage,
-  } = useTable(
-    {
-      columns,
-      data,
-    },
-    useSortBy,
-    usePagination
-  ) as TableInstance;
-
-  return (
-    <VStack align="stretch" spacing="4">
-      <Table {...getTableProps()} variant="simple">
-        <thead>
-          {headerGroups.map((headerGroup) => (
-            <Tr {...headerGroup.getHeaderGroupProps()}>
-              {headerGroup.headers.map((column) => (
-                <Th {...column.getHeaderProps(column.getSortByToggleProps())}>
-                  {column.render('Header')}
-                  <span>
-                    {column.isSorted ? (column.isSortedDesc ? ' 🔽' : ' 🔼') : ''}
-                  </span>
-                </Th>
-              ))}
-            </Tr>
-          ))}
-        </thead>
-        <Tbody {...getTableBodyProps()}>
-          {page.map((row) => (
-            <Tr {...row.getRowProps()}>
-              {row.cells.map((cell) => (
-                <Td {...cell.getCellProps()}>{cell.render('Cell')}</Td>
-              ))}
-            </Tr>
-          ))}
-        </Tbody>
-      </Table>
-      <div>
-        <button onClick={() => previousPage()} disabled={!canPreviousPage}>
-          Previous Page
-        </button>
-        <button onClick={() => nextPage()} disabled={!canNextPage}>
-          Next Page
-        </button>
-      </div>
-    </VStack>
-  );
-};
-
+// Reactコンポーネント
 const App = () => {
+  // テーブルのカラムとデータを設定
+  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = useTable({ columns, data: dataList });
+
   return (
-    <ChakraProvider>
-      <MyTable columns={columns} data={list} />
+    <ChakraProvider theme={theme}>
+      <Box p={4}>
+        <Table {...getTableProps()} width="100%">
+          <Thead>
+            {headerGroups.map(headerGroup => (
+              <Tr {...headerGroup.getHeaderGroupProps()}>
+                {headerGroup.headers.map(column => (
+                  <Th {...column.getHeaderProps()}>{column.render('Header')}</Th>
+                ))}
+              </Tr>
+            ))}
+          </Thead>
+          <Tbody {...getTableBodyProps()}>
+            {rows.map(row => {
+              prepareRow(row);
+              return (
+                <Tr {...row.getRowProps()}>
+                  {row.cells.map(cell => (
+                    <Td {...cell.getCellProps()}>{cell.render('Cell')}</Td>
+                  ))}
+                </Tr>
+              );
+            })}
+          </Tbody>
+        </Table>
+      </Box>
     </ChakraProvider>
   );
 };
+
+// テーブルのカラム定義
+const columns = [
+  { Header: 'ID', accessor: 'id' },
+  { Header: 'Name', accessor: 'name' },
+  { Header: 'Age', accessor: 'age' },
+];
 
 export default App;
 
