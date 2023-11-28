@@ -1,3 +1,5 @@
+```tsx
+
 import * as React from 'react';
 import { useTable, useSortBy } from '@tanstack/react-table';
 import { ChakraProvider, Table, Thead, Tbody, Tr, Th, Td } from '@chakra-ui/react';
@@ -68,3 +70,4 @@ const App = () => {
 };
 
 export default App;
+```
