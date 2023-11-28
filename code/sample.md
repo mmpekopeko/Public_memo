@@ -5,7 +5,7 @@ npm install react @types/react typescript @chakra-ui/react @emotion/react @emoti
 ```
 
 // SortableTable.tsx
-import React from 'react';
+import React, { useMemo } from 'react';
 import { useTable, useSortBy } from '@tanstack/react-table';
 import { Table, Thead, Tbody, Tr, Th, Td, chakra, Box } from '@chakra-ui/react';
 
@@ -16,7 +16,7 @@ interface Fruit {
   count: number;
 }
 
-interface Props {
+interface SortableTableProps {
   data: Fruit[];
 }
 
@@ -28,8 +28,8 @@ const ChakraTd = chakra(Td, {
   baseStyle: { bg: 'white', color: 'gray.700' },
 });
 
-const SortableTable: React.FC<Props> = ({ data }) => {
-  const columns = React.useMemo(
+const SortableTable = ({ data }: SortableTableProps) => {
+  const columns = useMemo(
     () => [
       { Header: 'Name', accessor: 'name' },
       { Header: 'Size', accessor: 'size' },
@@ -76,7 +76,6 @@ const SortableTable: React.FC<Props> = ({ data }) => {
 };
 
 export default SortableTable;
-
 
 ```
 
