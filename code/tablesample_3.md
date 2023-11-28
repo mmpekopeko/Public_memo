@@ -10,7 +10,7 @@ const data = [
 ];
 
 const TableComponent = () => {
-  // テーブルの設定
+  // テーブルの設定`
   const {
     getTableProps,
     getTableBodyProps,
